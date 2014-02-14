@@ -10,8 +10,9 @@
 ```sh
 $> brew install ansible
 ```
-
-Pull this repo
+-Pull this repo
+-Edit the provisioning files to customize (still a little hardcoded in places)
+-Run Vagrant
 ```sh
 $> vagrant up
 ```

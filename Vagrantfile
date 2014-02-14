@@ -3,11 +3,11 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.define "app1_eink", primary: true do |app|
+  config.vm.define "app1", primary: true do |app|
     # Every Vagrant virtual environment requires a box to build off of.
     app.vm.box = "ubuntu_saucy64"
 
-    app.vm.hostname = "app.einked.com"
+    app.vm.hostname = "app.localhost.com"
 
     # The url from where the 'config.vm.box' box will be fetched if it
     # doesn't already exist on the user's system.
