@@ -1,0 +1,52 @@
+---
+- hosts: appserver
+  sudo: yes
+  remote_user: vagrant
+  tasks:
+    - name: Update the apt cache; unless it's been updated in the last 8 hours
+      apt: update_cache=true  cache_valid_time=28800
+
+
+    - name: Install Python
+      apt: pkg=python-software-properties
+
+
+    - name: Install Python
+      apt: pkg=python
+
+
+    - name: Install g++
+      apt: pkg=g++
+
+
+    - name: Installing make
+      apt: pkg=make
+
+
+    - name: Grabbing the node repository
+      apt_repository: repo='ppa:chris-lea/node.js' state=present update_cache=yes
+
+
+    - name: Install node!
+      apt: pkg=nodejs state=latest
+
+
+    - name: Install git
+      apt: pkg=git state=latest
+
+# Installing the mean stack from mean.io
+    - name: Installing Bower
+      command: npm install -g bower
+
+
+    - name: Pulling down mean.io
+      git: repo=git@github.com:linnovate/mean.git dest=/usr/bin/ update=yes
+
+
+    - name: Installing mean.io
+      command: npm install chdir=/usr/bin/mean/
+
+
+    - name: Run mean.io
+      command: node server chdir=/usr/bin/mean/
+

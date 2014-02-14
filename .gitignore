@@ -1,0 +1,14 @@
+
+# GIT
+.git
+
+# OSx
+.DS_Store
+.DS_Store?
+*.swp*
+*.orig*
+*cache
+
+#Vagrant
+.vagrant
+

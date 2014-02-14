@@ -1,0 +1,18 @@
+---
+- hosts: appserver
+  sudo: yes
+  remote_user: vagrant
+  tasks:
+    - name: Installing Bower
+      command: npm install -g bower
+
+    - name: Pulling down mean.io
+      git: repo=git@github.com:linnovate/mean.git dest=/usr/bin/ name=mean.io
+
+    - name: Installing mean.io
+      command: npm install chdir=/usr/bin/mean.io/
+
+    - name: Run mean.io
+      command: node server chdir=/usr/bin/mean.io/
+
+
