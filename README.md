@@ -10,9 +10,6 @@ Installation
 # Status
 ** Not fully baked **
 
-
-# Installing
-
 - Install Virtualbox (https://www.virtualbox.org/wiki/Downloads)
 - Install Vagrant (http://www.vagrantup.com/downloads.html)
 - Install Ansible (via brew on OSX http://brew.sh/ )
@@ -28,8 +25,11 @@ $> git clone git@github.com:geedew/vagrant-mean.io.git
 ```sh
 $> vagrant up
 ```
+- The process for installing may take several minutes. Especially the part that is doing the mean.io installing.
 
 You can then login and run the command `grunt` from the `/home/vagrant/mean/` directory.
+
+Anything that is placed into the `./code` directory; will be avaialble at `/mnt/code` on the box via NFS.
 
 Requirements
 ------------
