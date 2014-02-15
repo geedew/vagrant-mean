@@ -1,0 +1,10 @@
+---
+- hosts: appserver
+  sudo: yes
+  remote_user: vagrant
+  tasks: 
+    - include: appserver.yml
+    - include: nodejs.yml
+    - include: mean.yml
+
+
