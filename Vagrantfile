@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
     # Every Vagrant virtual environment requires a box to build off of.
     app.vm.box = "ubuntu_saucy64"
 
-    app.vm.hostname = "app.localhost.com"
+    app.vm.hostname = "app1.localhost"
 
     # The url from where the 'config.vm.box' box will be fetched if it
     # doesn't already exist on the user's system.
@@ -15,9 +15,8 @@ Vagrant.configure("2") do |config|
 
 
     # Create a forwarded port mapping which allows access to a specific port
-    # within the machine from a port on the host machine. In the example below,
-    # accessing "localhost:8080" will access port 80 on the guest machine.
-    app.vm.network :forwarded_port, guest: 80, host: 9199
+    # within the machine from a port on the host machine. 
+    app.vm.network :forwarded_port, guest: 3000, host: 3000
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
@@ -54,8 +53,8 @@ Vagrant.configure("2") do |config|
     end
 
     app.vm.provision "ansible" do |ansible|
-      ansible.inventory_path = "provisioning/hosts"
-      ansible.playbook = "provisioning/main.yml"
+      ansible.inventory_path = "files/hosts"
+      ansible.playbook = "tasks/main.yml"
       # ansible.verbose = 'vvvv'
     end
   end
