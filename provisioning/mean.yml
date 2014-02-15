@@ -1,18 +1,19 @@
----
-- hosts: appserver
-  sudo: yes
-  remote_user: vagrant
-  tasks:
+
     - name: Installing Bower
       command: npm install -g bower
 
+    - name: Installing Grunt-cli
+      command: npm install -g grunt-cli
+
+    - name: Ensure github is in the known_hosts file
+      known_hosts: host=github.com state=present
+
     - name: Pulling down mean.io
-      git: repo=git@github.com:linnovate/mean.git dest=/usr/bin/ name=mean.io
+      git: repo='https://github.com/linnovate/mean.git' dest=/home/vagrant/mean
 
     - name: Installing mean.io
-      command: npm install chdir=/usr/bin/mean.io/
+      command: npm install chdir=/home/vagrant/mean/
 
     - name: Run mean.io
-      command: node server chdir=/usr/bin/mean.io/
-
-
+      sudo: false
+      command: grunt chdir=~/mean/
