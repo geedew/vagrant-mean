@@ -8,12 +8,36 @@
 #
 ##
 
-# App Server Name
-# - In vagrant, we name our main app server, the one running NodeJS. This is that name.
-# - This name must be unique from other boxes that are installed on the server
-PREFS[:app_server_name] = "app"
+# GENERAL
 
 # Domain
 # - The domain is used to set the hostname; each server name will be subdomains of this domain
 # - E.G. If app_server_name is 'app' and domain is 'localhost', the server hostname is 'app.localhost'
 PREFS[:domain] = "localhost"
+
+
+
+# APP
+
+# App Server Name
+# - In vagrant, we name our main app server, the one running NodeJS. This is that name.
+# - This name must be unique from other boxes that are installed on the server
+PREFS[:app_server_name] = "app"
+
+# App Server IP
+# - The IP used by the box; be careful to not place it within the same sub-network a DHCP host is on (IP collision is possible)
+PREFS[:app_server_ip] = "192.168.33.101"
+
+# App Box name
+# - This is the name for the downloaded .box file the app server will use.
+# - If you already have a server in mind, and in use in vagrant already, then you will want to change this name to avoid 
+#   downloading another box file.
+### Uncomment to use
+# PREFS[:app_box] = "ubuntu_saucy64"
+
+# App Box Url
+# - The url that app_box will use to download the App Box if missing
+### Uncomment to use
+# PREFS[:app_box_url] = "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box"
+
+

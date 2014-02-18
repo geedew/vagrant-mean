@@ -4,23 +4,32 @@
 
 # Defaults
 PREFS = {
-  :app_server_name => "app",
   :domain => "localhost",
+  :app_server_name => "app",
+  :app_server_ip => "192.168.33.101",
+  :app_box => "ubuntu_saucy64",
+  :app_box_url => "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box",
 }
+
+# Include the ovverrides if it is set
+if File.exist?("prefs.rb")
+  require_relative "prefs.rb"
+end
 
 Vagrant.configure("2") do |config|
 
   config.vm.define "app", primary: true do |app|
-    # Every Vagrant virtual environment requires a box to build off of.
-    app.vm.box = "ubuntu_saucy64"
 
     # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
     app.name = PREFS['app_server_name'] + "_" + Time.now.strftime('%s')
     app.vm.hostname = PREFS['app_server_name'] + "." + PREFS['domain']
 
+
+    # Every Vagrant virtual environment requires a box to build off of.
+    app.vm.box = PREFS['app_box']
     # The url from where the 'config.vm.box' box will be fetched if it
     # doesn't already exist on the user's system.
-    app.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box"
+    app.vm.box_url = PREFS['app_box_url']
 
 
     # Create a forwarded port mapping which allows access to a specific port
@@ -30,7 +39,7 @@ Vagrant.configure("2") do |config|
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
-    app.vm.network :private_network, ip: "192.168.33.101"
+    app.vm.network :private_network, ip: PREFS['app_server_ip']
 
     # Create a public network, which generally matched to bridged network.
     # Bridged networks make the machine appear as another physical device on
