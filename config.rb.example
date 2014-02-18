@@ -8,6 +8,7 @@
 #
 ##
 
+####################
 # GENERAL
 
 # Domain
@@ -15,8 +16,14 @@
 # - E.G. If app_server_name is 'app' and domain is 'localhost', the server hostname is 'app.localhost'
 PREFS[:domain] = "localhost"
 
+# NFS
+# - Network File Sharing
+# - This will set the VBox sharing to NFS, when true. If set to false, standard VBox Shares will
+#   be used. When set to true you may need to input a password to set NFS export settings on your host.
+PREFS[:nfs] = true
 
 
+####################
 # APP
 
 # App Server Name
@@ -27,6 +34,14 @@ PREFS[:app_server_name] = "app"
 # App Server IP
 # - The IP used by the box; be careful to not place it within the same sub-network a DHCP host is on (IP collision is possible)
 PREFS[:app_server_ip] = "192.168.33.101"
+
+# App Share
+# - Sharing code with your box is essential to actually writing an app
+# - The path you put here is a host (local) path that is relative to the Vagrantfile
+#   It will mount the share on the app server as /mnt/code
+# - The share will be mounted by default using NFS (requires password during `vagrant up`); see PREFS[:nfs]
+#   You can change nfs to false and it will then use normal vbox shares; however there is a severe performance penalty.
+PREFS[:app_share] = './code'
 
 # App Box name
 # - This is the name for the downloaded .box file the app server will use.
