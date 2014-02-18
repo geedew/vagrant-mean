@@ -1,0 +1,19 @@
+##
+# Configuration settings. 
+#
+# - Installation of this files
+# * Copy this file to `prefs.rb`
+# * Edit any settings in this file to alter the build process
+# $$ Profit
+#
+##
+
+# App Server Name
+# - In vagrant, we name our main app server, the one running NodeJS. This is that name.
+# - This name must be unique from other boxes that are installed on the server
+PREFS[:app_server_name] = "app"
+
+# Domain
+# - The domain is used to set the hostname; each server name will be subdomains of this domain
+# - E.G. If app_server_name is 'app' and domain is 'localhost', the server hostname is 'app.localhost'
+PREFS[:domain] = "localhost"

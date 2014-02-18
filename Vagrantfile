@@ -1,13 +1,22 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+
+# Defaults
+PREFS = {
+  :app_server_name => "app",
+  :domain => "localhost",
+}
+
 Vagrant.configure("2") do |config|
 
-  config.vm.define "app1", primary: true do |app|
+  config.vm.define "app", primary: true do |app|
     # Every Vagrant virtual environment requires a box to build off of.
     app.vm.box = "ubuntu_saucy64"
 
-    app.vm.hostname = "app1.localhost"
+    # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
+    app.name = PREFS['app_server_name'] + "_" + Time.now.strftime('%s')
+    app.vm.hostname = PREFS['app_server_name'] + "." + PREFS['domain']
 
     # The url from where the 'config.vm.box' box will be fetched if it
     # doesn't already exist on the user's system.
@@ -16,6 +25,7 @@ Vagrant.configure("2") do |config|
 
     # Create a forwarded port mapping which allows access to a specific port
     # within the machine from a port on the host machine. 
+    # Mean.io uses a default of 3000
     app.vm.network :forwarded_port, guest: 3000, host: 3000
 
     # Create a private network, which allows host-only access to the machine
