@@ -13,7 +13,15 @@ Installation
 - Install Virtualbox (https://www.virtualbox.org/wiki/Downloads)
 - Install Vagrant (http://www.vagrantup.com/downloads.html)
 - Install Ansible (via brew on OSX http://brew.sh/ )
+-- Install Brew on OSx if you don't have it
+
 ```sh
+# Goes and downloads brew for installation
+$> ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+# update brew now that it's installed
+$> brew doctor && brew update
+
 $> brew install ansible
 ```
 - Pull this repo
