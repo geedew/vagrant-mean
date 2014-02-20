@@ -78,4 +78,51 @@ Vagrant.configure("2") do |config|
     end
   end
 
+
+  config.vm.define "db", primary: true do |db|
+
+    # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
+    db.name = PREFS['app_server_name'] + "db_" + Time.now.strftime('%s')
+    db.vm.hostname = PREFS['app_server_name'] + "db." + PREFS['domain']
+
+
+    # Every Vagrant virtual environment requires a box to build off of.
+    db.vm.box = PREFS['app_box']
+    # The url from where the 'config.vm.box' box will be fetched if it
+    # doesn't already exist on the user's system.
+    db.vm.box_url = PREFS['app_box_url']
+
+
+    # Create a forwarded port mapping which allows access to a specific port
+    # within the machine from a port on the host machine. 
+    # Mongo default
+    db.vm.network :forwarded_port, guest: 27017, host: 27017
+    # Mongo status default
+    db.vm.network :forwarded_port, guest: 28017, host: 28017
+
+    # Create a private network, which allows host-only access to the machine
+    # using a specific IP.
+    db.vm.network :private_network, ip: PREFS['db_server_ip']
+
+    # Provider-specific configuration so you can fine-tune various
+    # backing providers for Vagrant. These expose provider-specific options.
+    # Example for VirtualBox:
+    #
+    app.vm.provider :virtualbox do |vb|
+      # Don't boot with headless mode
+      # vb.gui = true
+    
+      # Use VBoxManage to customize the VM. For example to change memory:
+      vb.customize ["modifyvm", :id, "--memory", "256"]
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--ioapic", "on"]
+    end
+
+    # app.vm.provision "ansible" do |ansible|
+    #   ansible.inventory_path = "files/hosts"
+    #   ansible.playbook = "tasks/main.yml"
+    #   # ansible.verbose = 'vvvv'
+    # end
+  end
+
 end

@@ -29,11 +29,13 @@ PREFS[:nfs] = true
 # App Server Name
 # - In vagrant, we name our main app server, the one running NodeJS. This is that name.
 # - This name must be unique from other boxes that are installed on the server
+# ** The DB server will append db to this name for all uses (e.g. appdb.localhost.com)
 PREFS[:app_server_name] = "app"
 
 # App Server IP
 # - The IP used by the box; be careful to not place it within the same sub-network a DHCP host is on (IP collision is possible)
 PREFS[:app_server_ip] = "192.168.33.101"
+PREFS[:db_server_ip] = "192.168.33.102"
 
 # App Share
 # - Sharing code with your box is essential to actually writing an app
