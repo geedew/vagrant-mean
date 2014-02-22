@@ -1,0 +1,9 @@
+---
+- hosts: appdbserver
+  sudo: yes
+  remote_user: vagrant
+  tasks: 
+    - include: dbserver.yml
+    - include: mongo.yml
+
+
