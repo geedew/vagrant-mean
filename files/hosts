@@ -1,2 +1,4 @@
 [appserver]
 192.168.33.101 # app.localhost.com
+[appdbserver]
+192.168.33.102 # appdb.localhost.com

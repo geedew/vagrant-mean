@@ -7,6 +7,7 @@ PREFS = {
   :domain => "localhost",
   :app_server_name => "app",
   :app_server_ip => "192.168.33.101",
+  :db_server_ip => "192.168.33.102",
   :app_box => "ubuntu_saucy64",
   :app_box_url => "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box",
 }
@@ -118,11 +119,11 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
     end
 
-    # app.vm.provision "ansible" do |ansible|
-    #   ansible.inventory_path = "files/hosts"
-    #   ansible.playbook = "tasks/main.yml"
-    #   # ansible.verbose = 'vvvv'
-    # end
+    app.vm.provision "ansible" do |ansible|
+      ansible.inventory_path = "files/hosts"
+      ansible.playbook = "tasks/db.yml"
+    # ansible.verbose = 'vvvv'
+    end
   end
 
 end
