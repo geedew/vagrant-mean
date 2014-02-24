@@ -22,15 +22,15 @@ Vagrant.configure("2") do |config|
   config.vm.define "app", primary: true do |app|
 
     # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
-    app.name = PREFS['app_server_name'] + "_" + Time.now.strftime('%s')
-    app.vm.hostname = PREFS['app_server_name'] + "." + PREFS['domain']
+    app.name = PREFS[:app_server_name] + "_" + Time.now.strftime('%s')
+    app.vm.hostname = PREFS[:app_server_name] + "." + PREFS[:domain]
 
 
     # Every Vagrant virtual environment requires a box to build off of.
-    app.vm.box = PREFS['app_box']
+    app.vm.box = PREFS[:app_box]
     # The url from where the 'config.vm.box' box will be fetched if it
     # doesn't already exist on the user's system.
-    app.vm.box_url = PREFS['app_box_url']
+    app.vm.box_url = PREFS[:app_box_url]
 
 
     # Create a forwarded port mapping which allows access to a specific port
@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
-    app.vm.network :private_network, ip: PREFS['app_server_ip']
+    app.vm.network :private_network, ip: PREFS[:app_server_ip]
 
     # Create a public network, which generally matched to bridged network.
     # Bridged networks make the machine appear as another physical device on
@@ -83,15 +83,15 @@ Vagrant.configure("2") do |config|
   config.vm.define "db", primary: true do |db|
 
     # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
-    db.name = PREFS['app_server_name'] + "db_" + Time.now.strftime('%s')
-    db.vm.hostname = PREFS['app_server_name'] + "db." + PREFS['domain']
+    db.name = PREFS[:app_server_name] + "db_" + Time.now.strftime('%s')
+    db.vm.hostname = PREFS[:app_server_name] + "db." + PREFS[:domain:]
 
 
     # Every Vagrant virtual environment requires a box to build off of.
-    db.vm.box = PREFS['app_box']
+    db.vm.box = PREFS[:app_box]
     # The url from where the 'config.vm.box' box will be fetched if it
     # doesn't already exist on the user's system.
-    db.vm.box_url = PREFS['app_box_url']
+    db.vm.box_url = PREFS[:app_box_url]
 
 
     # Create a forwarded port mapping which allows access to a specific port
