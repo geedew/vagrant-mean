@@ -84,7 +84,7 @@ Vagrant.configure("2") do |config|
 
     # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
     db.name = PREFS[:app_server_name] + "db_" + Time.now.strftime('%s')
-    db.vm.hostname = PREFS[:app_server_name] + "db." + PREFS[:domain:]
+    db.vm.hostname = PREFS[:app_server_name] + "db." + PREFS[:domain]
 
 
     # Every Vagrant virtual environment requires a box to build off of.
