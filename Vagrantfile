@@ -109,7 +109,7 @@ Vagrant.configure("2") do |config|
     # backing providers for Vagrant. These expose provider-specific options.
     # Example for VirtualBox:
     #
-    app.vm.provider :virtualbox do |vb|
+    db.vm.provider :virtualbox do |vb|
       # Don't boot with headless mode
       # vb.gui = true
     
