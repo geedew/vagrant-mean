@@ -119,7 +119,7 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
     end
 
-    app.vm.provision "ansible" do |ansible|
+    db.vm.provision "ansible" do |ansible|
       ansible.inventory_path = "files/hosts"
       ansible.playbook = "tasks/db.yml"
     # ansible.verbose = 'vvvv'
