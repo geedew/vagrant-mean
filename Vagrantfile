@@ -9,6 +9,7 @@ PREFS = {
   :app_server_ip => "192.168.33.101",
   :db_server_ip => "192.168.33.102",
   :app_box => "ubuntu_saucy64",
+  :app_share => "./code",
   :app_box_url => "http://cloud-images.ubuntu.com/vagrant/saucy/current/saucy-server-cloudimg-amd64-vagrant-disk1.box",
 }
 
@@ -103,7 +104,7 @@ Vagrant.configure("2") do |config|
 
     # Create a private network, which allows host-only access to the machine
     # using a specific IP.
-    db.vm.network :private_network, ip: PREFS['db_server_ip']
+    db.vm.network :private_network, ip: PREFS[:db_server_ip]
 
     # Provider-specific configuration so you can fine-tune various
     # backing providers for Vagrant. These expose provider-specific options.
