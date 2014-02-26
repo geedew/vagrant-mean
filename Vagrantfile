@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "app", primary: true do |app|
 
     # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
-    app.name = PREFS[:app_server_name] + "_" + Time.now.strftime('%s')
+    # app.name = PREFS[:app_server_name] + "_" + Time.now.strftime('%s')
     app.vm.hostname = PREFS[:app_server_name] + "." + PREFS[:domain]
 
 
@@ -84,7 +84,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "db", primary: true do |db|
 
     # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
-    db.name = PREFS[:app_server_name] + "db_" + Time.now.strftime('%s')
+    # db.name = PREFS[:app_server_name] + "db_" + Time.now.strftime('%s')
     db.vm.hostname = PREFS[:app_server_name] + "db." + PREFS[:domain]
 
 
