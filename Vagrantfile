@@ -26,13 +26,11 @@ Vagrant.configure("2") do |config|
     # app.name = PREFS[:app_server_name] + "_" + Time.now.strftime('%s')
     app.vm.hostname = PREFS[:app_server_name] + "." + PREFS[:domain]
 
-
     # Every Vagrant virtual environment requires a box to build off of.
     app.vm.box = PREFS[:app_box]
     # The url from where the 'config.vm.box' box will be fetched if it
     # doesn't already exist on the user's system.
     app.vm.box_url = PREFS[:app_box_url]
-
 
     # Create a forwarded port mapping which allows access to a specific port
     # within the machine from a port on the host machine. 
@@ -56,18 +54,11 @@ Vagrant.configure("2") do |config|
     # the path on the host to the actual folder. The second argument is
     # the path on the guest to mount the folder. And the optional third
     # argument is a set of non-required options.
-    # app.vm.synced_folder "../data", "/vagrant_data" 
     app.vm.synced_folder PREFS[:app_share], "/mnt/code", :nfs => PREFS[:nfs]
 
     # Provider-specific configuration so you can fine-tune various
     # backing providers for Vagrant. These expose provider-specific options.
-    # Example for VirtualBox:
-    #
     app.vm.provider :virtualbox do |vb|
-      # Don't boot with headless mode
-      # vb.gui = true
-    
-      # Use VBoxManage to customize the VM. For example to change memory:
       vb.customize ["modifyvm", :id, "--memory", "1024"]
       vb.customize ["modifyvm", :id, "--cpus", "4"]
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
@@ -87,16 +78,12 @@ Vagrant.configure("2") do |config|
     # db.name = PREFS[:app_server_name] + "db_" + Time.now.strftime('%s')
     db.vm.hostname = PREFS[:app_server_name] + "db." + PREFS[:domain]
 
-
     # Every Vagrant virtual environment requires a box to build off of.
     db.vm.box = PREFS[:app_box]
     # The url from where the 'config.vm.box' box will be fetched if it
     # doesn't already exist on the user's system.
     db.vm.box_url = PREFS[:app_box_url]
 
-
-    # Create a forwarded port mapping which allows access to a specific port
-    # within the machine from a port on the host machine. 
     # Mongo default
     db.vm.network :forwarded_port, guest: 27017, host: 27017
     # Mongo status default
@@ -108,13 +95,7 @@ Vagrant.configure("2") do |config|
 
     # Provider-specific configuration so you can fine-tune various
     # backing providers for Vagrant. These expose provider-specific options.
-    # Example for VirtualBox:
-    #
     db.vm.provider :virtualbox do |vb|
-      # Don't boot with headless mode
-      # vb.gui = true
-    
-      # Use VBoxManage to customize the VM. For example to change memory:
       vb.customize ["modifyvm", :id, "--memory", "256"]
       vb.customize ["modifyvm", :id, "--cpus", "2"]
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
