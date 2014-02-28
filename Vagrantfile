@@ -22,8 +22,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "app", primary: true do |app|
 
-    # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
-    # app.name = PREFS[:app_server_name] + "_" + Time.now.strftime('%s')
     app.vm.hostname = PREFS[:app_server_name] + "." + PREFS[:domain]
 
     # Every Vagrant virtual environment requires a box to build off of.
@@ -59,6 +57,8 @@ Vagrant.configure("2") do |config|
     # Provider-specific configuration so you can fine-tune various
     # backing providers for Vagrant. These expose provider-specific options.
     app.vm.provider :virtualbox do |vb|
+      # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
+      vb.name = 'apptestname' #PREFS[:app_server_name] + "_" + Time.now.strftime('%s')
       vb.customize ["modifyvm", :id, "--memory", "1024"]
       vb.customize ["modifyvm", :id, "--cpus", "4"]
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
@@ -67,15 +67,13 @@ Vagrant.configure("2") do |config|
     app.vm.provision "ansible" do |ansible|
       ansible.inventory_path = "files/hosts"
       ansible.playbook = "tasks/main.yml"
-      # ansible.verbose = 'vvvv'
+      ansible.verbose = 'vvvv'
     end
   end
 
 
   config.vm.define "db", primary: true do |db|
 
-    # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
-    # db.name = PREFS[:app_server_name] + "db_" + Time.now.strftime('%s')
     db.vm.hostname = PREFS[:app_server_name] + "db." + PREFS[:domain]
 
     # Every Vagrant virtual environment requires a box to build off of.
@@ -96,6 +94,8 @@ Vagrant.configure("2") do |config|
     # Provider-specific configuration so you can fine-tune various
     # backing providers for Vagrant. These expose provider-specific options.
     db.vm.provider :virtualbox do |vb|
+      # Set the name; this is used in VirtualBox so that it's easy to parse what box is running, etc.
+      vb.name = PREFS[:app_server_name] + "db_" + Time.now.strftime('%s')
       vb.customize ["modifyvm", :id, "--memory", "256"]
       vb.customize ["modifyvm", :id, "--cpus", "2"]
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
@@ -104,7 +104,7 @@ Vagrant.configure("2") do |config|
     db.vm.provision "ansible" do |ansible|
       ansible.inventory_path = "files/hosts"
       ansible.playbook = "tasks/db.yml"
-    # ansible.verbose = 'vvvv'
+      ansible.verbose = 'vvvv'
     end
   end
 
