@@ -1,6 +1,7 @@
 
-    - name: Installing Bower
+    - name: Installing Bower (may take some time)
       command: npm install -g bower
+      ignore_errors: yes
 
     - name: Installing Grunt-cli
       command: npm install -g grunt-cli
