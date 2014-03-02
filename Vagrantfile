@@ -62,12 +62,19 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
       vb.customize ["modifyvm", :id, "--cpus", "4"]
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
+      
+      # force the box to proxy the DNS requests through the NAT;
+      # this should cause less network issues when DNS is changing while wifi/vpn drops randomly
+      # http://www.virtualbox.org/manual/ch09.html#nat-adv-dns
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
 
     app.vm.provision "ansible" do |ansible|
       ansible.inventory_path = "files/hosts"
       ansible.playbook = "tasks/main.yml"
       ansible.verbose = 'vvvv'
+      # For development purposes
+      ansible.host_key_checking = false
     end
   end
 
@@ -99,12 +106,20 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyvm", :id, "--memory", "256"]
       vb.customize ["modifyvm", :id, "--cpus", "2"]
       vb.customize ["modifyvm", :id, "--ioapic", "on"]
+
+      
+      # force the box to proxy the DNS requests through the NAT;
+      # this should cause less network issues when DNS is changing while wifi/vpn drops randomly
+      # http://www.virtualbox.org/manual/ch09.html#nat-adv-dns
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
 
     db.vm.provision "ansible" do |ansible|
       ansible.inventory_path = "files/hosts"
       ansible.playbook = "tasks/db.yml"
       ansible.verbose = 'vvvv'
+      # For development purposes
+      ansible.host_key_checking = false
     end
   end
 
