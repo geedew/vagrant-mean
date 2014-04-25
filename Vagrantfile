@@ -18,6 +18,10 @@ if File.exist?("prefs.rb")
   require_relative "prefs.rb"
 end
 
+unless Vagrant.has_plugin?("vagrant-vbguest")
+   raise 'Vagrant-vbguest is not installed! Please run `vagrant plugin install vagrant-vbguest` before continuing`.'
+end
+
 Vagrant.configure("2") do |config|
 
   config.vm.define "app", primary: true do |app|
@@ -73,6 +77,7 @@ Vagrant.configure("2") do |config|
       ansible.inventory_path = "files/hosts"
       ansible.playbook = "tasks/main.yml"
       ansible.verbose = 'vvvv'
+      ansible.limit = 'appserver'
       # For development purposes
       ansible.host_key_checking = false
     end
@@ -117,6 +122,7 @@ Vagrant.configure("2") do |config|
     db.vm.provision "ansible" do |ansible|
       ansible.inventory_path = "files/hosts"
       ansible.playbook = "tasks/db.yml"
+      ansible.limit = 'appdbserver'
       ansible.verbose = 'vvvv'
       # For development purposes
       ansible.host_key_checking = false
