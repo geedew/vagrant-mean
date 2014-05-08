@@ -9,9 +9,9 @@
     - name: Ensure github is in the known_hosts file
       known_hosts: host=github.com state=present
 
-    - name: Pulling down mean.io
-      git: repo='https://github.com/linnovate/mean.git' dest=/home/vagrant/mean
+    - name: Pulling down mean.js
+      git: repo='https://github.com/meanjs/mean.git' dest=/home/vagrant/mean
 
-    - name: Installing mean.io
+    - name: Installing mean.js
       npm: path=/home/vagrant/mean/
 
